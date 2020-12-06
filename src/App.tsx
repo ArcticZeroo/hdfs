@@ -1,26 +1,55 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { RetirementBenefit } from './components/benefits/retirement/retirement-benefit';
+import { IncomeAndExpenses } from './components/benefits/income/income-and-expenses';
+import { StockPurchase } from './components/benefits/stock/stock-purchase';
+import { darkPalette, lightPalette } from './constants/colors';
+import { paletteVars } from './constants/css-variables';
+import { GrossIncomeContext, NetIncomeContext } from './context/income';
 import './App.css';
+import { IPalette } from './models/palette';
+import { keysOf } from './util/keys';
+import { QueryParamProvider } from 'use-query-params';
+
+const paletteToCss = (palette: IPalette): string => {
+    const result: string[] = [];
+
+    for (const key of keysOf(palette)) {
+        result.push(`${paletteVars[key]}: ${palette[key]};`);
+    }
+
+    return result.join('\n');
+};
+
+const defaultPaletteData = `
+${paletteToCss(lightPalette)};
+
+@media(prefers-color-scheme: dark) {
+  ${paletteToCss(darkPalette)};
+}
+`;
+
+const AppContainer = styled.div`
+  ${defaultPaletteData};
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(${paletteVars.backgroundColor});
+  color: var(${paletteVars.primaryTextColor});
+`;
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <AppContainer>
+            <QueryParamProvider>
+                <IncomeAndExpenses/>
+                <RetirementBenefit/>
+                <StockPurchase/>
+            </QueryParamProvider>
+        </AppContainer>
+    );
 }
 
 export default App;
