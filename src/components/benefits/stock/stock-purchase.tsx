@@ -2,7 +2,7 @@ import React, { ChangeEvent } from 'react';
 import styled from 'styled-components';
 import { useHasStockPurchasePlan, useStockPurchaseDiscount, useStockPurchaseLimit } from '../../../hooks/query-params';
 import { StringUtil } from '../../../util/string';
-import { Card } from '../../card/card';
+import { Card, CardBody, CardTitle } from '../../card/card';
 import { BoundedNumberInput, Input, Label, LabelAndInputContainer } from '../../input/labels-and-input';
 
 const RadioButtonInput = styled.input`
@@ -37,29 +37,35 @@ export const StockPurchase = () => {
     };
 
     return (
-        <Card title="Stock Purchase Plan">
-            <LabelAndInputContainer>
-                <Label>Does your employer offer an Employee Stock Purchase Plan?</Label>
-                <div>
-                    <YesNoButton isYes={true}/>
-                    <YesNoButton isYes={false}/>
-                </div>
-            </LabelAndInputContainer>
-            {
-                hasStockPurchasePlan && (
-                    <>
-                        <LabelAndInputContainer>
-                            <Label>Purchase Discount (0-100%)</Label>
-                            <BoundedNumberInput min={0} max={100} value={discountPercent}
-                                                onChange={setDiscountPercent}/>
-                        </LabelAndInputContainer>
-                        <LabelAndInputContainer>
-                            <Label>Yearly purchase limit ($)</Label>
-                            <BoundedNumberInput min={0} value={yearlyPurchaseLimit} onChange={setYearlyPurchaseLimit}/>
-                        </LabelAndInputContainer>
-                    </>
-                )
-            }
+        <Card>
+            <CardTitle>
+                Stock Purchase Plan
+            </CardTitle>
+            <CardBody>
+                <LabelAndInputContainer>
+                    <Label>Does your employer offer an Employee Stock Purchase Plan?</Label>
+                    <div>
+                        <YesNoButton isYes={true}/>
+                        <YesNoButton isYes={false}/>
+                    </div>
+                </LabelAndInputContainer>
+                {
+                    hasStockPurchasePlan && (
+                        <>
+                            <LabelAndInputContainer>
+                                <Label>Purchase Discount (0-100%)</Label>
+                                <BoundedNumberInput min={0} max={100} value={discountPercent}
+                                                    onChange={setDiscountPercent}/>
+                            </LabelAndInputContainer>
+                            <LabelAndInputContainer>
+                                <Label>Yearly purchase limit ($)</Label>
+                                <BoundedNumberInput min={0} value={yearlyPurchaseLimit}
+                                                    onChange={setYearlyPurchaseLimit}/>
+                            </LabelAndInputContainer>
+                        </>
+                    )
+                }
+            </CardBody>
         </Card>
     );
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { ExpensesAndBenefits } from './components/benefits/root';
+import { Recommendations } from './components/recommendation/recommendations';
 import { darkPalette, lightPalette } from './constants/colors';
 import { paletteVars } from './constants/css-variables';
 import './App.css';
@@ -41,6 +42,7 @@ function App() {
     return (
         <AppContainer>
             <ExpensesAndBenefits/>
+            <Recommendations/>
         </AppContainer>
     );
 }

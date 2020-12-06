@@ -3,19 +3,24 @@ import styled from 'styled-components';
 import { paletteVars } from '../../constants/css-variables';
 import { guessForegroundColor } from '../../util/guess-color';
 
-const CardContainer = styled.div`
+export const CardContainer = styled.div`
   border-radius: 0.5rem;
   padding: 1rem;
   margin: 1rem;
 `;
 
-const CardTitle = styled.div`
+export const CardTitle = styled.div`
   font-family: "Google Sans", "Product Sans", "Roboto", sans-serif;
   font-size: 1.25em;
   margin-bottom: 0.5rem;
 `;
 
-const CardBody = styled.div``;
+export const CardBody = styled.div``;
+
+export const CenteredCardTitle = styled.div`
+  text-align: center;
+  font-size: 1.5rem;
+`;
 
 export interface ICardProps {
     title?: React.ReactNode | string;
@@ -23,25 +28,14 @@ export interface ICardProps {
     textColor?: string;
 }
 
-export const Card: React.FC<ICardProps> = ({ title, children, backgroundColor, textColor }) => {
+export const Card: React.FC<ICardProps> = ({ children, backgroundColor, textColor }) => {
     if (!textColor && backgroundColor) {
         textColor = guessForegroundColor(backgroundColor);
     }
 
     return (
         <CardContainer style={{ backgroundColor, color: textColor }}>
-            {title && (
-                <CardTitle>
-                    {title}
-                </CardTitle>
-            )}
-            {
-                children && (
-                    <CardBody>
-                        {children}
-                    </CardBody>
-                )
-            }
+            {children}
         </CardContainer>
     );
 };
