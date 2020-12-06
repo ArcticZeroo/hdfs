@@ -7,14 +7,12 @@ export const primaryColors = {
     lightGrey:   '#EEE',
     white:       'white',
     black:       'black',
+    red:         '#F44336',
+    darkRed:     '#B71C1C',
 };
 
 export const accentColors = {
     blue: '#448AFF'
-};
-
-export const googleColors = {
-    buttonBlue: '#4285f4',
 };
 
 export const lightPalette: IPalette = {
@@ -23,6 +21,8 @@ export const lightPalette: IPalette = {
     primaryTextColor: primaryColors.white,
     accentColor:      primaryColors.lightGrey,
     accentTextColor:  primaryColors.almostBlack,
+    errorColor:       primaryColors.red,
+    errorTextColor:   primaryColors.almostBlack,
 };
 
 export const darkPalette: IPalette = {
@@ -31,4 +31,6 @@ export const darkPalette: IPalette = {
     primaryTextColor: primaryColors.almostWhite,
     accentColor:      accentColors.blue,
     accentTextColor:  primaryColors.almostBlack,
+    errorColor:       primaryColors.darkRed,
+    errorTextColor:   primaryColors.white,
 };

@@ -5,6 +5,11 @@ import { useQueryParam } from './use-query-param';
 
 export const useGrossIncome = () => useQueryParam(queryParam.grossIncome, numberSerializer, 0);
 export const useExpenses = () => useQueryParam(queryParam.expenses, numberSerializer, 0);
+export const useNetIncome = () => {
+    const [grossIncome] = useGrossIncome();
+    const [expenses] = useExpenses();
+    return grossIncome - expenses;
+}
 
 export const useRetirementBenefitType = () => useQueryParam(queryParam.retirementBenefitType,
     enumSerializer(Object.values(RetirementAccountType)), RetirementAccountType.noneOrOther);

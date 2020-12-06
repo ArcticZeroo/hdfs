@@ -5,5 +5,7 @@ export const paletteVars: Record<keyof IPalette, string> = {
     primaryColor:     '--primary-color',
     accentColor:      '--accent-color',
     primaryTextColor: '--primary-text-color',
-    accentTextColor:  '--accent-text-color'
+    accentTextColor:  '--accent-text-color',
+    errorColor:       '--error-color',
+    errorTextColor:   '--error-text-color',
 };

@@ -9,5 +9,9 @@ export interface IPalette {
     primaryTextColor: string;
     // Defines the text color on top of the accent color
     accentTextColor: string;
+    // Defines the color for errors
+    errorColor: string;
+    // Defines the text color on top of errors
+    errorTextColor: string;
 }
 

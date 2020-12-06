@@ -9,17 +9,19 @@ export const CardContainer = styled.div`
   margin: 1rem;
 `;
 
-export const CardTitle = styled.div`
+const cardTitleStyle = `
   font-family: "Google Sans", "Product Sans", "Roboto", sans-serif;
   font-size: 1.25em;
   margin-bottom: 0.5rem;
 `;
 
+export const CardTitle = styled.div`${cardTitleStyle}`;
+
 export const CardBody = styled.div``;
 
 export const CenteredCardTitle = styled.div`
+  ${cardTitleStyle};
   text-align: center;
-  font-size: 1.5rem;
 `;
 
 export interface ICardProps {
@@ -53,7 +55,8 @@ export const AccentCard: React.FC<ICardProps> = ({ children, ...props }) => (
 );
 
 export const ErrorCard: React.FC<ICardProps> = ({ children, ...props }) => (
-    <Card {...props} backgroundColor={''} textColor={''}>
+    <Card {...props} backgroundColor={`var(${paletteVars.errorColor})`}
+          textColor={`var(${paletteVars.errorTextColor})`}>
         {children}
     </Card>
-)
+);
