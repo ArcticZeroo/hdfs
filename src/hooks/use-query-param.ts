@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { searchParams, updateParam } from '../api/url/url-manager';
 import { ISerializable } from '../models/serializable';
 
-const getDefaultState = <T>(paramName: string, serializable: ISerializable<T>, defaultValue: T) => {
+const getCurrentValue = <T>(paramName: string, serializable: ISerializable<T>, defaultValue: T) => {
     const paramValue = searchParams.urlSearchParams.get(paramName);
 
     if (!paramValue) {
@@ -13,7 +13,22 @@ const getDefaultState = <T>(paramName: string, serializable: ISerializable<T>, d
 };
 
 export const useQueryParam = <T>(paramName: string, paramSerializable: ISerializable<T>, defaultValue: T) => {
-    const [value, setValueState] = useState(getDefaultState(paramName, paramSerializable, defaultValue));
+    const [value, setValueState] = useState(getCurrentValue(paramName, paramSerializable, defaultValue));
+
+    useEffect(() => {
+        const onSearchParamsChanged = ([newSearchParams, oldSearchParams]: [URLSearchParams, URLSearchParams]) => {
+            if (newSearchParams.get(paramName) !== oldSearchParams.get(paramName)) {
+                const newValue = getCurrentValue(paramName, paramSerializable, defaultValue);
+                if (newValue !== value) {
+                    setValueState(newValue);
+                }
+            }
+        };
+
+        searchParams.addListener(onSearchParamsChanged);
+
+        return () => searchParams.removeListener(onSearchParamsChanged);
+    }, []);
 
     const updateValue = (newValue: T) => {
         if (newValue === defaultValue) {
