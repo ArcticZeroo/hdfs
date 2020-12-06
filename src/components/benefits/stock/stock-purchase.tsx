@@ -2,7 +2,7 @@ import React, { ChangeEvent } from 'react';
 import styled from 'styled-components';
 import { useHasStockPurchasePlan, useStockPurchaseDiscount, useStockPurchaseLimit } from '../../../hooks/query-params';
 import { StringUtil } from '../../../util/string';
-import Card from '../../card/card';
+import { Card } from '../../card/card';
 import { BoundedNumberInput, Input, Label, LabelAndInputContainer } from '../../input/labels-and-input';
 
 const RadioButtonInput = styled.input`

@@ -1,9 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FSAContributions } from './components/benefits/fsa/fsa-contributions';
-import { RetirementBenefit } from './components/benefits/retirement/retirement-benefit';
-import { IncomeAndExpenses } from './components/benefits/income/income-and-expenses';
-import { StockPurchase } from './components/benefits/stock/stock-purchase';
+import { ExpensesAndBenefits } from './components/benefits/root';
 import { darkPalette, lightPalette } from './constants/colors';
 import { paletteVars } from './constants/css-variables';
 import './App.css';
@@ -34,6 +31,7 @@ const AppContainer = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   align-items: center;
   background: var(${paletteVars.backgroundColor});
   color: var(${paletteVars.primaryTextColor});
@@ -42,10 +40,7 @@ const AppContainer = styled.div`
 function App() {
     return (
         <AppContainer>
-            <IncomeAndExpenses/>
-            <RetirementBenefit/>
-            <StockPurchase/>
-            <FSAContributions/>
+            <ExpensesAndBenefits/>
         </AppContainer>
     );
 }

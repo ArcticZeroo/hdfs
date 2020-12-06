@@ -23,7 +23,7 @@ export interface ICardProps {
     textColor?: string;
 }
 
-const Card: React.FC<ICardProps> = ({ title, children, backgroundColor, textColor }) => {
+export const Card: React.FC<ICardProps> = ({ title, children, backgroundColor, textColor }) => {
     if (!textColor && backgroundColor) {
         textColor = guessForegroundColor(backgroundColor);
     }
@@ -48,7 +48,18 @@ const Card: React.FC<ICardProps> = ({ title, children, backgroundColor, textColo
 
 Card.defaultProps = {
     backgroundColor: `var(${paletteVars.primaryColor})`,
-    textColor: `var(${paletteVars.primaryTextColor})`
+    textColor:       `var(${paletteVars.primaryTextColor})`
 };
 
-export default Card;
+export const AccentCard: React.FC<ICardProps> = ({ children, ...props }) => (
+    <Card {...props} backgroundColor={`var(${paletteVars.accentColor})`}
+          textColor={`var(${paletteVars.accentTextColor})`}>
+        {children}
+    </Card>
+);
+
+export const ErrorCard: React.FC<ICardProps> = ({ children, ...props }) => (
+    <Card {...props} backgroundColor={''} textColor={''}>
+        {children}
+    </Card>
+)

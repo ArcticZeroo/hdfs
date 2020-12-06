@@ -1,6 +1,6 @@
 import React from 'react';
 import { useExpenses, useGrossIncome } from '../../../hooks/query-params';
-import Card from '../../card/card';
+import { Card } from '../../card/card';
 import { Label, LabelAndInputContainer, Input, BoundedNumberInput } from '../../input/labels-and-input';
 
 export const IncomeAndExpenses: React.FC = () => {

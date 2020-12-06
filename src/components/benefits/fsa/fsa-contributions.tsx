@@ -1,6 +1,6 @@
 import React from "react";
 import { useMedicalExpenses } from '../../../hooks/query-params';
-import Card from '../../card/card';
+import { Card } from '../../card/card';
 import { BoundedNumberInput, Label, LabelAndInputContainer } from '../../input/labels-and-input';
 
 export const FSAContributions = () => {
