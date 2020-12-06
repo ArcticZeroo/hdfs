@@ -16,8 +16,12 @@ export const useQueryParam = <T>(paramName: string, paramSerializable: ISerializ
     const [value, setValueState] = useState(getDefaultState(paramName, paramSerializable, defaultValue));
 
     const updateValue = (newValue: T) => {
-        const serializedValue = paramSerializable.serialize(newValue);
-        updateParam(paramName, serializedValue);
+        if (newValue === defaultValue) {
+            updateParam(paramName, null);
+        } else {
+            const serializedValue = paramSerializable.serialize(newValue);
+            updateParam(paramName, serializedValue);
+        }
         setValueState(newValue);
     };
 

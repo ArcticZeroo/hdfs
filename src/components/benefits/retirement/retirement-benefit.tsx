@@ -1,4 +1,10 @@
 import React, { ChangeEvent, useState } from 'react';
+import {
+    useDefinedContributionExpectedReturn,
+    useDefinedContributionMatchLimit,
+    useDefinedContributionMatchPercent,
+    useRetirementBenefitType
+} from '../../../hooks/query-params';
 import { RetirementAccountType } from '../../../models/retirement';
 import Card from '../../card/card';
 import { BoundedNumberInput, Input, Label, LabelAndInputContainer } from '../../input/labels-and-input';
@@ -6,10 +12,10 @@ import { BoundedNumberInput, Input, Label, LabelAndInputContainer } from '../../
 type RetirementAccountMember = keyof typeof RetirementAccountType;
 
 export const RetirementBenefit = () => {
-    const [benefitType, setBenefitType] = useState<RetirementAccountMember>(RetirementAccountType.noneOrOther);
-    const [matchAmount, setMatchAmount] = useState(0);
-    const [matchLimit, setMatchLimit] = useState(0);
-    const [returnPercent, setReturnPercent] = useState(0);
+    const [benefitType, setBenefitType] = useRetirementBenefitType();
+    const [matchPercent, setMatchPercent] = useDefinedContributionMatchPercent();
+    const [matchLimit, setMatchLimit] = useDefinedContributionMatchLimit();
+    const [returnPercent, setReturnPercent] = useDefinedContributionExpectedReturn();
 
     const onTypeChange = (event: ChangeEvent<HTMLSelectElement>) => {
         const typeValue = event.target.value;
@@ -34,8 +40,8 @@ export const RetirementBenefit = () => {
                     <>
                         <LabelAndInputContainer>
                             <Label>Match Amount (0-100%)</Label>
-                            <BoundedNumberInput placeholder={'Amount (percent)'} value={matchAmount}
-                                   onChange={setMatchAmount} min={0} max={100}/>
+                            <BoundedNumberInput placeholder={'Amount (percent)'} value={matchPercent}
+                                   onChange={setMatchPercent} min={0} max={100}/>
                         </LabelAndInputContainer>
                         <LabelAndInputContainer>
                             <Label>Match Limit ($, Yearly)</Label>

@@ -1,15 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { RetirementBenefit } from './components/benefits/retirement/retirement-benefit';
 import { IncomeAndExpenses } from './components/benefits/income/income-and-expenses';
 import { StockPurchase } from './components/benefits/stock/stock-purchase';
 import { darkPalette, lightPalette } from './constants/colors';
 import { paletteVars } from './constants/css-variables';
-import { GrossIncomeContext, NetIncomeContext } from './context/income';
 import './App.css';
 import { IPalette } from './models/palette';
 import { keysOf } from './util/keys';
-import { QueryParamProvider } from 'use-query-params';
 
 const paletteToCss = (palette: IPalette): string => {
     const result: string[] = [];
@@ -43,11 +41,9 @@ const AppContainer = styled.div`
 function App() {
     return (
         <AppContainer>
-            <QueryParamProvider>
-                <IncomeAndExpenses/>
-                <RetirementBenefit/>
-                <StockPurchase/>
-            </QueryParamProvider>
+            <IncomeAndExpenses/>
+            <RetirementBenefit/>
+            <StockPurchase/>
         </AppContainer>
     );
 }

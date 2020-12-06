@@ -4,4 +4,8 @@ export const queryParam = {
     retirementBenefitType: 'rbt',
     definedContributionMatchPercent: 'dcmp',
     definedContributionMatchLimit: 'dcml',
+    definedContributionExpectedReturn: 'dcer',
+    hasStockPurchasePlan: 'hspp',
+    stockPurchaseDiscount: 'spd',
+    stockPurchaseLimit: 'spl',
 };

@@ -1,6 +1,7 @@
 import React, { ChangeEvent } from 'react';
-import { useState } from 'react';
 import styled from 'styled-components';
+import { useHasStockPurchasePlan, useStockPurchaseDiscount, useStockPurchaseLimit } from '../../../hooks/query-params';
+import { StringUtil } from '../../../util/string';
 import Card from '../../card/card';
 import { BoundedNumberInput, Input, Label, LabelAndInputContainer } from '../../input/labels-and-input';
 
@@ -13,12 +14,26 @@ const RadioButtonLabel = styled.label`
 `;
 
 export const StockPurchase = () => {
-    const [hasStockPurchasePlan, setHasStockPurchasePlan] = useState(false);
-    const [discountPercent, setDiscountPercent] = useState(0);
-    const [yearlyPurchaseLimit, setYearlyPurchaseLimit] = useState(0);
+    const [hasStockPurchasePlan, setHasStockPurchasePlan] = useHasStockPurchasePlan();
+    const [discountPercent, setDiscountPercent] = useStockPurchaseDiscount();
+    const [yearlyPurchaseLimit, setYearlyPurchaseLimit] = useStockPurchaseLimit();
 
     const onHasStockPurchasePlanChanged = (event: ChangeEvent<HTMLInputElement>) => {
         setHasStockPurchasePlan(event.target.value === 'yes');
+    };
+
+    const nameBase = 'has-purchase-plan';
+    const YesNoButton = ({ isYes }: { isYes: boolean }) => {
+        const name = isYes ? 'Yes' : 'No';
+        const id = `${nameBase}-${name.toLowerCase()}`;
+        return (
+            <>
+                <RadioButtonInput type="radio" name={nameBase} id={id} value={name.toLowerCase()}
+                                  onChange={onHasStockPurchasePlanChanged}
+                                  checked={isYes === hasStockPurchasePlan}/><RadioButtonLabel
+                htmlFor={id}>{StringUtil.capitalize(name)}</RadioButtonLabel>
+            </>
+        );
     };
 
     return (
@@ -26,14 +41,8 @@ export const StockPurchase = () => {
             <LabelAndInputContainer>
                 <Label>Does your employer offer an Employee Stock Purchase Plan?</Label>
                 <div>
-                    <RadioButtonInput type="radio" name="has-purchase-plan" id="has-purchase-plan-yes" value="yes"
-                                      onChange={onHasStockPurchasePlanChanged}
-                                      checked={hasStockPurchasePlan}/><RadioButtonLabel
-                    htmlFor="has-purchase-plan-yes">Yes</RadioButtonLabel>
-                    <RadioButtonInput type="radio" name="has-purchase-plan" id="has-purchase-plan-no" value="no"
-                                      onChange={onHasStockPurchasePlanChanged}
-                                      checked={!hasStockPurchasePlan}/><RadioButtonLabel
-                    htmlFor="has-purchase-plan-no">No</RadioButtonLabel>
+                    <YesNoButton isYes={true}/>
+                    <YesNoButton isYes={false}/>
                 </div>
             </LabelAndInputContainer>
             {
