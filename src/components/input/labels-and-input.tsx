@@ -5,6 +5,7 @@ import { MathUtil } from '../../util/math';
 export const LabelAndInputContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin: 0.5rem 0 0.5rem 0;
 `;
 

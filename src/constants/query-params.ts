@@ -8,4 +8,5 @@ export const queryParam = {
     hasStockPurchasePlan: 'hspp',
     stockPurchaseDiscount: 'spd',
     stockPurchaseLimit: 'spl',
+    fsaContributions: 'fc'
 };

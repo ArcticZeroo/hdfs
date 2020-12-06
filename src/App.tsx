@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { FSAContributions } from './components/benefits/fsa/fsa-contributions';
 import { RetirementBenefit } from './components/benefits/retirement/retirement-benefit';
 import { IncomeAndExpenses } from './components/benefits/income/income-and-expenses';
 import { StockPurchase } from './components/benefits/stock/stock-purchase';
@@ -44,6 +45,7 @@ function App() {
             <IncomeAndExpenses/>
             <RetirementBenefit/>
             <StockPurchase/>
+            <FSAContributions/>
         </AppContainer>
     );
 }

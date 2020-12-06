@@ -15,3 +15,5 @@ export const useDefinedContributionExpectedReturn = () => useQueryParam(queryPar
 export const useHasStockPurchasePlan = () => useQueryParam(queryParam.hasStockPurchasePlan, booleanSerializer, false);
 export const useStockPurchaseDiscount = () => useQueryParam(queryParam.stockPurchaseDiscount, numberSerializer, 0);
 export const useStockPurchaseLimit = () => useQueryParam(queryParam.stockPurchaseLimit, numberSerializer, 0);
+
+export const useMedicalExpenses = () => useQueryParam(queryParam.fsaContributions, numberSerializer, 0);
