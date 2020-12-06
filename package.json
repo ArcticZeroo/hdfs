@@ -18,7 +18,6 @@
     "react-scripts": "4.0.0",
     "styled-components": "^5.2.1",
     "typescript": "^4.0.3",
-    "use-query-params": "^1.1.9",
     "web-vitals": "^0.2.4"
   },
   "scripts": {

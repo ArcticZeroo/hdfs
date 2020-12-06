@@ -1,27 +1,18 @@
-import history from 'history/hash';
-import { URLParameters } from '../../models/parameters';
+import { createBrowserHistory } from 'history';
+import Nullable from '../../models/nullable';
+import { SearchParamsNotifier } from './search-params-notifier';
 
-const parameters: Record<URLParameters, string> = {
-    [URLParameters.expenses]:                  'expenses',
-    [URLParameters.grossIncome]:               'grossIncome',
-    [URLParameters.retirementType]:            'retireType',
-    [URLParameters.retirementMatchPercentage]: 'retireMatchPercentage',
-    [URLParameters.retirementMatchYearlyCap]:  'retireYearlyCap'
-};
+export const history = createBrowserHistory();
 
-export function saveStateInUrl(state: Record<URLParameters, string>) {
-    const stateData = btoa(JSON.stringify(state));
-    history.push({
-        pathname: history.location.pathname,
-        search: `?state=${stateData}`
-    });
-}
+export const searchParams = new SearchParamsNotifier(history);
 
-export function retrieveStateFromUrl() {
-    const searchParams = new URLSearchParams(history.location.search);
-    const stateValue = searchParams.get('state');
-    if (!stateValue) {
-        return {};
+export const updateParam = (param: string, value: Nullable<string>) => {
+    const currentUrlSearchParams = new URLSearchParams(searchParams.urlSearchParams);
+    // doesn't matter if we mutate this one because it's about to be updated anyways, /shrug
+    if (!value) {
+        currentUrlSearchParams.delete(param);
+    } else {
+        currentUrlSearchParams.set(param, value);
     }
-    return JSON.parse(atob(stateValue));
-}
+    history.replace(`${history.location.pathname}?${currentUrlSearchParams.toString()}`);
+};
