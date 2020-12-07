@@ -10,6 +10,12 @@ export const incomeBrackets2020 = [
 
 export const standardDeduction2020 = 12_400;
 
-export const rothContributionLimit = (age: number) => age < 50 ? 6000 : 7000;
-
 export const recommendedMonthsForSavings = 6;
+
+export const retirementRothContributionLimit = (age: number) => age < 50 ? 6000 : 7000;
+
+export const retirement401kContributionLimit = 19500;
+
+export const hsaContributionLimit = (age: number) => age < 55 ? 3550 : 4550;
+
+export const fsaContributionLimit = 2750;

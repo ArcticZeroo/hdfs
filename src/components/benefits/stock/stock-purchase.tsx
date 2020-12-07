@@ -1,40 +1,12 @@
-import React, { ChangeEvent } from 'react';
-import styled from 'styled-components';
+import React from 'react';
 import { useHasStockPurchasePlan, useStockPurchaseDiscount, useStockPurchaseLimit } from '../../../hooks/query-params';
-import { StringUtil } from '../../../util/string';
 import { Card, CardBody, CardTitle } from '../../card/card';
-import { BoundedNumberInput, Input, Label, LabelAndInputContainer } from '../../input/labels-and-input';
-
-const RadioButtonInput = styled.input`
-`;
-
-const RadioButtonLabel = styled.label`
-  padding-left: 0.25rem;
-  padding-right: 1rem;
-`;
+import { BooleanInput, BoundedNumberInput, Label, LabelAndInputContainer } from '../../input/labels-and-input';
 
 export const StockPurchase = () => {
     const [hasStockPurchasePlan, setHasStockPurchasePlan] = useHasStockPurchasePlan();
     const [discountPercent, setDiscountPercent] = useStockPurchaseDiscount();
     const [yearlyPurchaseLimit, setYearlyPurchaseLimit] = useStockPurchaseLimit();
-
-    const onHasStockPurchasePlanChanged = (event: ChangeEvent<HTMLInputElement>) => {
-        setHasStockPurchasePlan(event.target.value === 'yes');
-    };
-
-    const nameBase = 'has-purchase-plan';
-    const YesNoButton = ({ isYes }: { isYes: boolean }) => {
-        const name = isYes ? 'Yes' : 'No';
-        const id = `${nameBase}-${name.toLowerCase()}`;
-        return (
-            <>
-                <RadioButtonInput type="radio" name={nameBase} id={id} value={name.toLowerCase()}
-                                  onChange={onHasStockPurchasePlanChanged}
-                                  checked={isYes === hasStockPurchasePlan}/><RadioButtonLabel
-                htmlFor={id}>{StringUtil.capitalize(name)}</RadioButtonLabel>
-            </>
-        );
-    };
 
     return (
         <Card>
@@ -44,10 +16,7 @@ export const StockPurchase = () => {
             <CardBody>
                 <LabelAndInputContainer>
                     <Label>Does your employer offer an Employee Stock Purchase Plan?</Label>
-                    <div>
-                        <YesNoButton isYes={true}/>
-                        <YesNoButton isYes={false}/>
-                    </div>
+                    <BooleanInput nameBase={'has-purchase-plan'} value={hasStockPurchasePlan} onChange={setHasStockPurchasePlan}/>
                 </LabelAndInputContainer>
                 {
                     hasStockPurchasePlan && (

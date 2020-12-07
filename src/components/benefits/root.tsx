@@ -1,6 +1,6 @@
 import React from 'react';
 import { AccentCard, CenteredCardTitle } from '../card/card';
-import { FSAContributions } from './fsa/fsa-contributions';
+import { HealthSavingsContributions } from './health-savings/health-savings-contributions';
 import { IncomeAndExpenses } from './income/income-and-expenses';
 import { RetirementBenefit } from './retirement/retirement-benefit';
 import { LiquidSavings } from './savings/liquid-savings';
@@ -14,7 +14,7 @@ export const ExpensesAndBenefits = () => (
             </CenteredCardTitle>
         </AccentCard>
         <IncomeAndExpenses/>
-        <FSAContributions/>
+        <HealthSavingsContributions/>
         <RetirementBenefit/>
         <StockPurchase/>
         <LiquidSavings/>

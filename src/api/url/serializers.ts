@@ -25,21 +25,25 @@ export const booleanSerializer: ISerializable<boolean> = {
     deserialize(value: string): boolean {
         return Boolean(Number(value));
     }
-}
+};
 
-export const enumSerializer = (values: string[]): ISerializable<string> => ({
-    serialize(value: string): string {
-        const enumIndex = values.indexOf(value)
-        if (enumIndex === -1) {
-            return '';
+export const enumSerializer = <T extends Record<string, string>>(theEnum: T): ISerializable<T[keyof T]> => {
+    const keys = Object.keys(theEnum) as Array<keyof T>;
+
+    return {
+        serialize(value: string): string {
+            const enumIndex = keys.indexOf(value);
+            if (enumIndex === -1) {
+                return '';
+            }
+            return enumIndex.toString();
+        },
+        deserialize(value: string) {
+            const asIndex = Number(value);
+            if (Number.isNaN(asIndex)) {
+                return theEnum[keys[0]];
+            }
+            return theEnum[keys[asIndex]];
         }
-        return enumIndex.toString();
-    },
-    deserialize(value: string): string {
-        const asIndex = Number(value);
-        if (Number.isNaN(asIndex)) {
-            return '';
-        }
-        return values[asIndex];
-    }
-})
+    };
+};

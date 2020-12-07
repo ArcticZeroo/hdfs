@@ -11,8 +11,8 @@ export const IncomeAndExpenses: React.FC = () => {
     const [grossIncome, setGrossIncome] = useGrossIncome();
     const [expenses, setExpenses] = useExpenses();
     const [personalUse, setPersonalUse] = usePersonalUse();
-    const netIncome = grossIncome - expenses;
-    const taxAmount = Math.max(getRawTaxAmount(grossIncome * 12) - standardDeduction2020, 0);
+    const netIncome = MathUtil.toFixed(grossIncome - expenses, 2);
+    const taxAmount = MathUtil.toFixed(Math.max(getRawTaxAmount(grossIncome * 12) - standardDeduction2020, 0), 2);
     const afterTax = MathUtil.toFixed(netIncome - (taxAmount / 12), 2);
     const afterTaxAndPersonal = MathUtil.toFixed(afterTax * (1 - (personalUse / 100)), 2);
 
