@@ -4,10 +4,7 @@ export abstract class MathUtil {
     }
 
     static toFixed(value: number, precision: number) {
-        let multiplier = 1;
-        for (let i = 0; i < precision; i++) {
-            multiplier *= 10;
-        }
+        const multiplier = Math.pow(10, precision);
         return Math.floor(value * multiplier) / multiplier;
     }
 }

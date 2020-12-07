@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { ExpensesAndBenefits } from './components/benefits/root';
 import { Demographics } from './components/demographics/demographics';
 import { Recommendations } from './components/recommendation/recommendations';
+import { SavingsAndInvestments } from './components/savings-and-investments/root';
 import { darkPalette, lightPalette } from './constants/colors';
 import { paletteVars } from './constants/css-variables';
 import './App.css';
@@ -43,6 +44,7 @@ function App() {
         <AppContainer>
             <Demographics/>
             <ExpensesAndBenefits/>
+            <SavingsAndInvestments/>
             <Recommendations/>
         </AppContainer>
     );

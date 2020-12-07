@@ -1,3 +1,4 @@
+import { MathUtil } from '../util/math';
 export const incomeBrackets2020 = [
     [[0, 9875], 0.10],
     [[9876, 40125], 0.12],
@@ -14,8 +15,12 @@ export const recommendedMonthsForSavings = 6;
 
 export const retirementRothContributionLimit = (age: number) => age < 50 ? 6000 : 7000;
 
+export const retirementRothIncomeLimit = 139000;
+
 export const retirement401kContributionLimit = 19500;
 
 export const hsaContributionLimit = (age: number) => age < 55 ? 3550 : 4550;
 
 export const fsaContributionLimit = 2750;
+
+export const recommendedPercentInStock = (age: number) => MathUtil.clamp(110 - age, { min: 0, max: 100 });
