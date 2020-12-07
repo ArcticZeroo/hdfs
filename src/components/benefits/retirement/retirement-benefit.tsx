@@ -53,9 +53,9 @@ export const RetirementBenefit = () => {
                                                     onChange={setMatchLimit} min={0}/>
                             </LabelAndInputContainer>
                             <LabelAndInputContainer>
-                                <Label>Expected return (0-100%)</Label>
+                                <Label>Expected return (%)</Label>
                                 <BoundedNumberInput placeholder={'Amount (percent)'} value={returnPercent}
-                                                    onChange={setReturnPercent} min={0} max={100}/>
+                                                    onChange={setReturnPercent} min={0}/>
                             </LabelAndInputContainer>
                         </>
                     )

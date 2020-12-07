@@ -1,6 +1,6 @@
-import { incomeBrackets2020 } from '../../constants/income-bracket';
+import { incomeBrackets2020 } from '../../constants/finance';
 
-export const getTotalTax = (income: number) => {
+export const getRawTaxAmount = (income: number) => {
     let totalTax = 0;
 
     for (const [[minBound, maxBound], taxRate] of incomeBrackets2020) {
@@ -13,3 +13,4 @@ export const getTotalTax = (income: number) => {
 
     return totalTax;
 };
+

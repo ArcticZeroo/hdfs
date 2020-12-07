@@ -1,6 +1,8 @@
 export const queryParam = {
+    age: 'a',
     grossIncome: 'gi',
     expenses: 'ex',
+    personalUse: 'pu',
     retirementBenefitType: 'rbt',
     definedContributionMatchPercent: 'dcmp',
     definedContributionMatchLimit: 'dcml',
@@ -8,5 +10,7 @@ export const queryParam = {
     hasStockPurchasePlan: 'hspp',
     stockPurchaseDiscount: 'spd',
     stockPurchaseLimit: 'spl',
-    fsaContributions: 'fc'
+    fsaContributions: 'fc',
+    savingsDesired: 'sd',
+    savingsAlready: 'sa',
 };

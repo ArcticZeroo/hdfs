@@ -7,3 +7,9 @@ export const incomeBrackets2020 = [
     [[207351, 518400], 0.35],
     [[518401, Number.POSITIVE_INFINITY], 0.37]
 ] as const;
+
+export const standardDeduction2020 = 12_400;
+
+export const rothContributionLimit = (age: number) => age < 50 ? 6000 : 7000;
+
+export const recommendedMonthsForSavings = 6;
