@@ -22,6 +22,7 @@ export const CardBody = styled.div``;
 export const CenteredCardTitle = styled.div`
   ${cardTitleStyle};
   text-align: center;
+  margin-bottom: 0;
 `;
 
 export interface ICardProps {

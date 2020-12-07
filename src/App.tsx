@@ -33,7 +33,6 @@ const AppContainer = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
   align-items: center;
   background: var(${paletteVars.backgroundColor});
   color: var(${paletteVars.primaryTextColor});
