@@ -19,9 +19,7 @@ export const useQueryParam = <T>(paramName: string, paramSerializable: ISerializ
         const onSearchParamsChanged = ([newSearchParams, oldSearchParams]: [URLSearchParams, URLSearchParams]) => {
             if (newSearchParams.get(paramName) !== oldSearchParams.get(paramName)) {
                 const newValue = getCurrentValue(paramName, paramSerializable, defaultValue);
-                if (newValue !== value) {
-                    setValueState(newValue);
-                }
+                setValueState(newValue);
             }
         };
 
@@ -37,7 +35,7 @@ export const useQueryParam = <T>(paramName: string, paramSerializable: ISerializ
             const serializedValue = paramSerializable.serialize(newValue);
             updateParam(paramName, serializedValue);
         }
-        setValueState(newValue);
+        //setValueState(newValue);
     };
 
     return [value, updateValue] as const;

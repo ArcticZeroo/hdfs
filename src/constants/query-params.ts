@@ -4,6 +4,7 @@ export const queryParam = {
     grossIncome:                           'gi',
     expenses:                              'ex',
     personalUse:                           'pu',
+    stateTax:                              'st',
     retirementBenefitType:                 'rbt',
     retirement401kType:                    'rfkt',
     definedContributionMatchPercent:       'dcmp',

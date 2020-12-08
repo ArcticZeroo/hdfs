@@ -13,3 +13,9 @@ export const InvestmentPreference = {
     moderate:     'moderate',
     aggressive:   'aggressive',
 } as const;
+
+export const InvestmentType = {
+    cash:     'cash',
+    bonds:    'bonds',
+    equities: 'equities',
+} as const;

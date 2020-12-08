@@ -1,7 +1,7 @@
 import React from 'react';
-import { getRawTaxAmount } from '../../../api/income/income';
+import { getRawYearlyTaxAmount } from '../../../api/income/income';
 import { standardDeduction2020 } from '../../../constants/finance';
-import { useExpenses, useGrossIncome, usePersonalUse } from '../../../hooks/query-params';
+import { useExpenses, useGrossIncome, usePersonalUse, useStateTax } from '../../../hooks/query-params';
 import { MathUtil } from '../../../util/math';
 import { Card, CardBody, CardTitle } from '../../card/card';
 import { Label, LabelAndInputContainer, Input, BoundedNumberInput } from '../../input/labels-and-input';
@@ -11,8 +11,9 @@ export const IncomeAndExpenses: React.FC = () => {
     const [grossIncome, setGrossIncome] = useGrossIncome();
     const [expenses, setExpenses] = useExpenses();
     const [personalUse, setPersonalUse] = usePersonalUse();
+    const [stateTax, setStateTax] = useStateTax();
     const netIncome = MathUtil.toFixed(grossIncome - expenses, 2);
-    const taxAmount = MathUtil.toFixed(Math.max(getRawTaxAmount(grossIncome * 12) - standardDeduction2020, 0), 2);
+    const taxAmount = MathUtil.toFixed(Math.max(getRawYearlyTaxAmount(grossIncome * 12, stateTax) - standardDeduction2020, 0), 2);
     const afterTax = MathUtil.toFixed(netIncome - (taxAmount / 12), 2);
     const afterTaxAndPersonal = MathUtil.toFixed(afterTax * (1 - (personalUse / 100)), 2);
 
@@ -33,6 +34,12 @@ export const IncomeAndExpenses: React.FC = () => {
                         Expenses ($)
                     </Label>
                     <BoundedNumberInput value={expenses} onChange={setExpenses} min={0}/>
+                </LabelAndInputContainer>
+                <LabelAndInputContainer>
+                    <Label>
+                        Your State's Income Tax (%)
+                    </Label>
+                    <BoundedNumberInput value={stateTax} onChange={setStateTax} min={0} max={100}/>
                 </LabelAndInputContainer>
                 <LabelAndInputContainer>
                     <Label>

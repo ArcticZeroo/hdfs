@@ -9,6 +9,7 @@ export const useInvestmentPreference = () => useQueryParam(queryParam.investment
 export const useGrossIncome = () => useQueryParam(queryParam.grossIncome, numberSerializer, 0);
 export const useExpenses = () => useQueryParam(queryParam.expenses, numberSerializer, 0);
 export const usePersonalUse = () => useQueryParam(queryParam.personalUse, numberSerializer, 0);
+export const useStateTax = () => useQueryParam(queryParam.stateTax, numberSerializer, 0);
 export const useNetIncome = () => {
     const [grossIncome] = useGrossIncome();
     const [expenses] = useExpenses();

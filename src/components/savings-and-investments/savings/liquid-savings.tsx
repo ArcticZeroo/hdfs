@@ -1,5 +1,5 @@
 import React from 'react';
-import { getRawTaxAmount } from '../../../api/income/income';
+import { getRawYearlyTaxAmount } from '../../../api/income/income';
 import { recommendedMonthsForSavings, standardDeduction2020 } from '../../../constants/finance';
 import {
     useExpenses,
@@ -19,7 +19,7 @@ export const LiquidSavings = () => {
     const [personalUsePercent] = usePersonalUse();
 
     const netIncome = grossIncome - expenses;
-    const yearlyTaxAmount = getRawTaxAmount(grossIncome * 12) - standardDeduction2020;
+    const yearlyTaxAmount = getRawYearlyTaxAmount(grossIncome * 12) - standardDeduction2020;
     const afterTaxMoney = netIncome - (yearlyTaxAmount / 12);
     const moneyUsedForPersonal = afterTaxMoney * (personalUsePercent / 100);
     const savingsRecommended = MathUtil.toFixed((expenses + moneyUsedForPersonal) * recommendedMonthsForSavings, 2);
@@ -43,7 +43,10 @@ export const LiquidSavings = () => {
                     <Input disabled={true} type="number" value={savingsRecommended}/>
                 </LabelAndInputContainer>
                 <LabelAndInputContainer>
-                    <Label>How much would you like to have in savings? ($)</Label>
+                    <Label>
+                        How much would you like to have in savings? ($)<br/>
+                        <Hint>If you don't change this value, it will always equal the recommended value.</Hint>
+                    </Label>
                     <BoundedNumberInput value={savingsDesired} onChange={setSavingsDesired} min={0}/>
                 </LabelAndInputContainer>
                 <LabelAndInputContainer>

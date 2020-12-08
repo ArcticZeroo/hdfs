@@ -1,3 +1,4 @@
+import { InvestmentPreference, InvestmentType } from '../models/finance';
 import { MathUtil } from '../util/math';
 export const incomeBrackets2020 = [
     [[0, 9875], 0.10],
@@ -24,3 +25,21 @@ export const hsaContributionLimit = (age: number) => age < 55 ? 3550 : 4550;
 export const fsaContributionLimit = 2750;
 
 export const recommendedPercentInStock = (age: number) => MathUtil.clamp(110 - age, { min: 0, max: 100 });
+
+export const investmentSplit = {
+    [InvestmentPreference.conservative]: {
+        [InvestmentType.cash]:     0.2,
+        [InvestmentType.bonds]:    0.4,
+        [InvestmentType.equities]: 0.4,
+    },
+    [InvestmentPreference.moderate]:     {
+        [InvestmentType.cash]:     0.1,
+        [InvestmentType.bonds]:    0.3,
+        [InvestmentType.equities]: 0.6,
+    },
+    [InvestmentPreference.aggressive]:   {
+        [InvestmentType.cash]:     0.05,
+        [InvestmentType.bonds]:    0.175,
+        [InvestmentType.equities]: 0.775,
+    },
+} as const;
