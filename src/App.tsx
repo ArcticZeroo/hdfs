@@ -21,11 +21,7 @@ const paletteToCss = (palette: IPalette): string => {
 };
 
 const defaultPaletteData = `
-${paletteToCss(lightPalette)};
-
-@media(prefers-color-scheme: dark) {
-  ${paletteToCss(darkPalette)};
-}
+${paletteToCss(darkPalette)};
 `;
 
 const AppContainer = styled.div`

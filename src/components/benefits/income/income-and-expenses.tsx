@@ -31,7 +31,10 @@ export const IncomeAndExpenses: React.FC = () => {
                 </LabelAndInputContainer>
                 <LabelAndInputContainer>
                     <Label>
-                        Expenses ($)
+                        Expenses ($)<br/>
+                        <Hint>
+                            This should include medical expenses.
+                        </Hint>
                     </Label>
                     <BoundedNumberInput value={expenses} onChange={setExpenses} min={0}/>
                 </LabelAndInputContainer>

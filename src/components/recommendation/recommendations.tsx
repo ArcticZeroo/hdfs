@@ -18,7 +18,7 @@ import {
     useHasStockPurchasePlan, useInvestmentPreference,
     useIsHSASupported, useMedicalExpenses,
     useNetIncome,
-    usePersonalUse,
+    usePersonalUse, useRetirement401kType,
     useRetirementBenefitType,
     useSavingsAlready,
     useSavingsDesired,
@@ -26,7 +26,7 @@ import {
     useStockPurchaseDiscount,
     useStockPurchaseLimit
 } from '../../hooks/query-params';
-import { InvestmentType, RetirementAccountType } from '../../models/finance';
+import { InvestmentType, Retirement401kType, RetirementAccountType } from '../../models/finance';
 import { MathUtil } from '../../util/math';
 import { StringUtil } from '../../util/string';
 import { AccentCard, Card, CardBody, CardTitle, CenteredCardTitle, ErrorCard } from '../card/card';
@@ -79,6 +79,7 @@ const PositiveCashFlowRecommendations = () => {
     const [personalUsePercent] = usePersonalUse();
 
     const [retirementAccountType] = useRetirementBenefitType();
+    const [retirement401kType] = useRetirement401kType();
     const [definedContributionMatchPercent] = useDefinedContributionMatchPercent();
     const [definedContributionMatchLimit] = useDefinedContributionMatchLimit();
     const [definedContributionReturn] = useDefinedContributionExpectedReturn();
@@ -141,8 +142,8 @@ const PositiveCashFlowRecommendations = () => {
 
     if (retirementAccountType === RetirementAccountType.employeeContributed) {
         transactions.push({
-            name:    '401k retirement',
-            isTaxed: false,
+            name:    '401k Plan',
+            isTaxed: retirement401kType === Retirement401kType.roth,
             cost:    monthlyDollarsRequiredUntilRetirementMatchLimitHit
         });
     }
@@ -169,14 +170,6 @@ const PositiveCashFlowRecommendations = () => {
         });
     }
 
-    if (canContributeToRothIRA) {
-        transactions.push({
-            name:    'Roth IRA',
-            isTaxed: true,
-            cost:    retirementRothContributionLimit(age) / 12
-        });
-    }
-
     const percentOfSavingsAchieved = liquidSavingsDesired === 0 ? 1 : liquidSavingsAlready / liquidSavingsDesired;
     const savingsDivisorRatio = Math.min(Math.exp(percentOfSavingsAchieved - 0.95), 1);
     const splitForUserPreference = investmentSplit[investmentPreference];
@@ -185,17 +178,29 @@ const PositiveCashFlowRecommendations = () => {
 
     const differenceInSavingsPercentage = savingsAsPercentOfRemaining - splitForUserPreference[InvestmentType.cash];
 
-    transactions.push({
-        name:    'Liquid Savings',
-        isTaxed: true,
-        cost:    savingsPerMonth
-    });
+    if (savingsPerMonth > 0) {
+        transactions.push({
+            name:    'Liquid Savings',
+            isTaxed: true,
+            cost:    savingsPerMonth
+        });
+    }
 
-    transactions.push({
-        name:    'Stock purchase plan (you\'ll get this money back with the discount as soon as you can sell)',
-        isTaxed: true,
-        cost:    stockPurchasePlanLimit / 12
-    });
+    if (canContributeToRothIRA) {
+        transactions.push({
+            name:    'Roth IRA',
+            isTaxed: true,
+            cost:    retirementRothContributionLimit(age) / 12
+        });
+    }
+
+    if (hasStockPurchasePlan) {
+        transactions.push({
+            name:    'Stock purchase plan (you\'ll get this money back with the discount as soon as you can sell)',
+            isTaxed: true,
+            cost:    stockPurchasePlanLimit / 12
+        });
+    }
 
     const remainingMoneyAfterEverything = remainingMoney();
     // normally we'd let the final algorithm handle filtering out transactions that have no money left,
